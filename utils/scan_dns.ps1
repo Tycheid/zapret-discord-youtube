@@ -71,6 +71,7 @@ foreach ($domain in ($sortedCandidates | Select-Object -First $maxAddedDomains))
     $newDomains += $domain
     $added++
 }
+
 if (Test-Path $UserList) {
     $lines = Get-Content $UserList -Encoding UTF8
     $newLines = @()
