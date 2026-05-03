@@ -63,6 +63,13 @@ foreach ($domain in ($sortedCandidates | Select-Object -First $maxAddedDomains))
     $parent = $domain -replace '^.*?([^.]+\.[^.]+)$', '$1'
     if ($parent -in $existing -and $parent -notmatch 'googlevideo|ggpht|ytimg') { continue }
 
+    if ($choices -contains '12') {
+        try {
+            $reachable = Test-Connection -ComputerName $domain -Count 1 -Quiet -TimeoutSeconds 1
+            if ($reachable) { continue }
+        } catch { }
+    }
+
     try {
         $dns = Resolve-DnsName -Name $domain -Type A -ErrorAction Stop
         if (-not $dns -or ($dns.IPAddress -eq '127.0.0.1')) { continue }
