@@ -1,4 +1,3 @@
-# scan_dns.ps1
 param(
     [string]$ServiceChoice,
     [string]$UserList = "..\lists\list-general-user.txt",
@@ -102,7 +101,7 @@ if ($added -gt 0) {
     $logEntry = "$timestamp | Choice: $ServiceChoice | Added domains: $added"
     $logEntry | Add-Content -Path $LogFile -Encoding UTF8
     Write-Host "[+] Added $added new domain(s) to list-general-user.txt" -ForegroundColor Green
-    Write-Host "    See log: utils\scan_cache.log" -ForegroundColor Gray
+    Write-Host "    See log: utils\scan_cache.log"
 } else {
     $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm'
     $logEntry = "$timestamp | Choice: $ServiceChoice | No new domains"
